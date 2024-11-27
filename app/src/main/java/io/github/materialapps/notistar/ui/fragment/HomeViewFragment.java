@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.paging.PagedList;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,8 @@ import android.view.ViewGroup;
 
 import io.github.materialapps.notistar.R;
 import io.github.materialapps.notistar.databinding.FragmentHomeViewBinding;
+import io.github.materialapps.notistar.entity.NotiDumpItem;
+import io.github.materialapps.notistar.ui.adapter.NotiAdapter;
 
 public class HomeViewFragment extends Fragment {
 
@@ -37,7 +41,6 @@ public class HomeViewFragment extends Fragment {
         setHasOptionsMenu(true);
         ((AppCompatActivity) getActivity()).setSupportActionBar(binding.mainToolbar);
         return view;
-
     }
 
     @Override
@@ -45,10 +48,18 @@ public class HomeViewFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(HomeViewViewModel.class);
         // TODO: Use the ViewModel
-
+        initView();
     }
 
     private void initView(){
-
+        NotiAdapter adapter=new NotiAdapter(NotiAdapter.callback);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false);
+        binding.listFlyoutArea.notiList.setLayoutManager(layoutManager);
+        binding.listFlyoutArea.notiList.setAdapter(adapter);
+        //绑定关系
+        mViewModel.getAllData().observe(getViewLifecycleOwner(),o->{
+            adapter.submitList((PagedList<NotiDumpItem>) o);
+            binding.listFlyoutArea.notiList.scrollToPosition(0);
+        });
     }
 }

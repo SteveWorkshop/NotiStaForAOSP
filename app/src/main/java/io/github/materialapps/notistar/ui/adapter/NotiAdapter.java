@@ -20,7 +20,7 @@ public class NotiAdapter extends PagedListAdapter<NotiDumpItem,NotiAdapter.ViewH
 
     public static final Callback callback=new Callback();
 
-    protected NotiAdapter(@NonNull DiffUtil.ItemCallback<NotiDumpItem> diffCallback) {
+    public NotiAdapter(@NonNull DiffUtil.ItemCallback<NotiDumpItem> diffCallback) {
         super(diffCallback);
     }
 

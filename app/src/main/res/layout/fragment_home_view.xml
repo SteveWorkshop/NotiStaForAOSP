@@ -23,6 +23,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <include layout="@layout/noti_list_flyout" />
+        <!--        sona，不加这个id会找不到里面，必须是一条链才行！！！神坑！！！！      -->
+        <include
+            android:id="@+id/list_flyout_area"
+            layout="@layout/noti_list_flyout" />
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
