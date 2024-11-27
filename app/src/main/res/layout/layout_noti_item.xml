@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        style="?attr/materialCardViewFilledStyle">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="5dp">
+                <TextView
+                    android:text="微信"
+                    android:id="@+id/txb_app_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  "
+                    tools:ignore="SpeakableTextPresentCheck" />
+                <TextView
+                    android:text="今天 09:41"
+                    android:id="@+id/txb_send_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:dividerInsetStart="8dp"
+                app:dividerInsetEnd="8dp"
+                android:layout_margin="8dp"/>
+            <LinearLayout
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/img_noti_icon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="4"
+                   android:orientation="vertical">
+                   <TextView
+                       android:layout_margin="3dp"
+                       android:id="@+id/txb_noti_title"
+                       android:textSize="18sp"
+                        android:textStyle="bold"
+                       android:text="女朋友"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"/>
+                   <TextView
+                       android:id="@+id/txb_noti_text"
+                       android:layout_margin="3dp"
+                       android:text="周末出去玩吧好不好~o( =∩ω∩= )m，人家需要陪[卖萌]"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"/>
+               </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</LinearLayout>

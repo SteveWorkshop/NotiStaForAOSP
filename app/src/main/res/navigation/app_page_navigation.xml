@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_page_navigation"
+    app:startDestination="@id/homeViewFragment">
+
+    <fragment
+        android:id="@+id/homeViewFragment"
+        android:name="io.github.materialapps.notistar.ui.fragment.HomeViewFragment"
+        android:label="fragment_home_view"
+        tools:layout="@layout/fragment_home_view" />
+    <fragment
+        android:id="@+id/appViewFragment"
+        android:name="io.github.materialapps.notistar.ui.fragment.AppViewFragment"
+        android:label="fragment_app_view"
+        tools:layout="@layout/fragment_app_view" />
+    <fragment
+        android:id="@+id/navDetailFragment"
+        android:name="io.github.materialapps.notistar.ui.fragment.NavDetailFragment"
+        android:label="fragment_nav_detail"
+        tools:layout="@layout/fragment_nav_detail" />
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="io.github.materialapps.notistar.ui.fragment.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
+
+</navigation>

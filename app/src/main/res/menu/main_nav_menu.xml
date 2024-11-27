@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="通知管理">
+        <menu>
+            <item
+                android:id="@+id/menu_all"
+                android:title="全部通知"
+                android:icon="@drawable/baseline_notifications_24"
+                android:checkable="true"
+                />
+            <item
+                android:id="@+id/menu_app_category"
+                android:title="软件包视图"
+                android:icon="@drawable/baseline_apps_24"
+                android:checkable="true"
+                />
+        </menu>
+    </item>
+    <item android:title="设置与帮助">
+        <menu>
+            <item
+                android:id="@+id/menu_settings"
+                android:title="设置"
+                android:icon="@drawable/baseline_settings_24"
+                android:checkable="true"
+                />
+            <item
+                android:id="@+id/menu_about_us"
+                android:title="关于此实用程序"
+                android:icon="@drawable/baseline_perm_device_information_24"
+                android:checkable="true"
+                />
+        </menu>
+    </item>
+</menu>
