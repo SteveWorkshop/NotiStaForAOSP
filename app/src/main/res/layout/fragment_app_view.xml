@@ -1,13 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.slidingpanelayout.widget.SlidingPaneLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragment.AppViewFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="软件包视图" />
+    <!-- The first child view becomes the left pane. When the combined needed
+        width, expressed using android:layout_width, doesn't fit on-screen at
+        once, the right pane is permitted to overlap the left. -->
 
-</FrameLayout>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:id="@+id/app_list_frame">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/app_list_main_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="应用列表"
+                android:minHeight="?attr/actionBarSize"
+                />
+
+        </com.google.android.material.appbar.AppBarLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!-- The second child becomes the right (content) pane. In this example,
+         android:layout_weight is used to expand this detail pane to consume
+         leftover available space when the entire window is wide enough to fit
+         the left and right pane.-->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/noti_app_main_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="此应用的所有通知"
+                android:minHeight="?attr/actionBarSize"
+                />
+        </com.google.android.material.appbar.AppBarLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <include
+                android:id="@+id/list_app_flyout_area"
+                layout="@layout/noti_list_flyout" />
+
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.slidingpanelayout.widget.SlidingPaneLayout>

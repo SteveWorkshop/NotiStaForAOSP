@@ -14,6 +14,7 @@ import lombok.ToString;
 @Entity
 public class NotiDumpItem extends BaseEntity implements Serializable {
     private String packageName;
+    private String packageInfoName;//还是存储一下吧
     private String category;
     private String channelId;
     private int importance;

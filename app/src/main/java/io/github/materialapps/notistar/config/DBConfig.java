@@ -12,7 +12,7 @@ import io.github.materialapps.notistar.dao.NotiDao;
 import io.github.materialapps.notistar.entity.ChatRecord;
 import io.github.materialapps.notistar.entity.NotiDumpItem;
 
-@Database(version = 1,entities = {NotiDumpItem.class, ChatRecord.class},exportSchema = false)
+@Database(version = 2,entities = {NotiDumpItem.class, ChatRecord.class},exportSchema = false)
 public abstract class DBConfig extends RoomDatabase {
     public static final String DB_NAME="notistar.db";
     private static volatile DBConfig instance;

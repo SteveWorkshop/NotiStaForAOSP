@@ -34,10 +34,10 @@ public interface NotiDao {
     @Query("select * from NotiDumpItem where content like '%'+:content+'%' order by `when` desc")
     DataSource.Factory<Integer,NotiDumpItem> getByContent_v2(String content);
 
-    @Query("select * from NotiDumpItem where packageName=:packageName order by `when` desc")
+    @Query("select * from NotiDumpItem where packageInfoName=:packageName order by `when` desc")
     List<NotiDumpItem> getByPackageName(String packageName);
 
-    @Query("select * from NotiDumpItem where packageName=:packageName order by `when` desc")
+    @Query("select * from NotiDumpItem where packageInfoName=:packageName order by `when` desc")
     DataSource.Factory<Integer,NotiDumpItem> getByPackageName_v2(String packageName);
 
     @Query("update NotiDumpItem set isDeleted=1 where id=:id")

@@ -4,6 +4,7 @@ package io.github.materialapps.notistar.service;
 //import android.content.Intent;
 //import android.os.IBinder;
 import android.app.Notification;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.service.notification.NotificationListenerService;
@@ -19,6 +20,7 @@ import io.github.materialapps.notistar.config.DBConfig;
 import io.github.materialapps.notistar.dao.NotiDao;
 import io.github.materialapps.notistar.entity.NotiDumpItem;
 import io.github.materialapps.notistar.util.IDUtil;
+import io.github.materialapps.notistar.util.PackageUtil;
 
 public class DumpNotificationService extends NotificationListenerService {
 
@@ -38,13 +40,15 @@ public class DumpNotificationService extends NotificationListenerService {
         String packageName = sbn.getPackageName();
         Notification notification = sbn.getNotification();
 
-        String content="";
 
         Bundle extras = notification.extras;
         RemoteViews contentView = notification.contentView;
 
+
+
         if(contentView!=null){
             //todo：暂不支持复杂视图的解析
+            System.out.println("有复杂视图");
         }
 
         String category = notification.category;
@@ -54,7 +58,7 @@ public class DumpNotificationService extends NotificationListenerService {
 
         String title = (String) extras.get(Notification.EXTRA_TITLE);//通知标题
         String subText = (String) extras.get(Notification.EXTRA_SUB_TEXT);//通知附加内容
-        String text = (String) extras.get(Notification.EXTRA_TEXT);//通知内容
+        String content = (String) extras.get(Notification.EXTRA_TEXT);//通知内容
 
         long when = notification.when;
         final String[] fileName = {null};//一眼丁真，我测你马。。。。。
@@ -90,11 +94,18 @@ public class DumpNotificationService extends NotificationListenerService {
         String name=fileName[0];
         String bigText = (String) extras.getCharSequence(Notification.EXTRA_BIG_TEXT);
 
-
         //持久化
         item.setKey(key);
         item.setCategory(category);
-        item.setPackageName(packageName);
+        //todo:转换名称
+        String appName= null;
+        try {
+            appName = PackageUtil.getNameByPackage(packageName);
+        } catch (PackageManager.NameNotFoundException e) {
+            appName=packageName;//fallback，不过应该触发不了吧
+        }
+        item.setPackageInfoName(packageName);
+        item.setPackageName(appName);
         item.setImportance(importance);
         item.setIconPath(name);
         item.setWhen(when);
