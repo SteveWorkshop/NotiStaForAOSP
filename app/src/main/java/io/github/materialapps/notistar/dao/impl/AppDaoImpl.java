@@ -19,19 +19,24 @@ public class AppDaoImpl implements AppDao {
 
         List<AppItem> ret=new ArrayList<>();
         for (ApplicationInfo applicationInfo : all) {
-            //todo；显示图标
-            AppItem item=new AppItem();
-            item.setPackageInfoName(applicationInfo.packageName);
-            String appName=null;
-
-            try {
-                appName=PackageUtil.getNameByPackage(applicationInfo.packageName);
-            } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
-                appName=applicationInfo.packageName;
+            //todo;自有选择是否展示系统app
+            if((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM)==0){
+                //todo；显示图标
+                AppItem item=new AppItem();
+                item.setPackageInfoName(applicationInfo.packageName);
+                String appName=null;
+                try {
+                    appName=PackageUtil.getNameByPackage(applicationInfo.packageName);
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                    appName=applicationInfo.packageName;
+                }
+                item.setAppName(appName);
+                ret.add(item);
             }
-            item.setAppName(appName);
-            ret.add(item);
+            else{
+                //todo:是系统应用
+            }
         }
         ret.sort((Comparator.comparing(AppItem::getAppName)));
         return ret;

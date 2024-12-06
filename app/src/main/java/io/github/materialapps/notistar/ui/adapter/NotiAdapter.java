@@ -1,5 +1,6 @@
 package io.github.materialapps.notistar.ui.adapter;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,10 +18,16 @@ import java.text.SimpleDateFormat;
 
 import io.github.materialapps.notistar.R;
 import io.github.materialapps.notistar.entity.NotiDumpItem;
+import lombok.Getter;
+import lombok.Setter;
 
 public class NotiAdapter extends PagedListAdapter<NotiDumpItem,NotiAdapter.ViewHolder> {
 
     public static final Callback callback=new Callback();
+
+    @Getter
+    @Setter
+    private Bar bar;
 
     public NotiAdapter(@NonNull DiffUtil.ItemCallback<NotiDumpItem> diffCallback) {
         super(diffCallback);
@@ -30,6 +39,11 @@ public class NotiAdapter extends PagedListAdapter<NotiDumpItem,NotiAdapter.ViewH
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_noti_item,parent,false);
         ViewHolder holder=new ViewHolder(view);
         //todo:列表点击事件回调
+        holder.itemView.setOnClickListener(v->{
+            int absoluteAdapterPosition = holder.getAbsoluteAdapterPosition();
+            NotiDumpItem item = getItem(absoluteAdapterPosition);
+            bar.foo(item,absoluteAdapterPosition);
+        });
         return holder;
     }
 
@@ -87,5 +101,9 @@ public class NotiAdapter extends PagedListAdapter<NotiDumpItem,NotiAdapter.ViewH
             txbNotiTitle=itemView.findViewById(R.id.txb_noti_title);
             txbNotiContent=itemView.findViewById(R.id.txb_noti_text);
         }
+    }
+
+    public interface Bar{
+        void foo(NotiDumpItem item,int index);
     }
 }

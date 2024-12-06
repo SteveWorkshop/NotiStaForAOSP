@@ -25,8 +25,17 @@
                 app:title="应用列表"
                 android:minHeight="?attr/actionBarSize"
                 />
-
         </com.google.android.material.appbar.AppBarLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/app_select_scroll_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <!-- The second child becomes the right (content) pane. In this example,
@@ -44,7 +53,7 @@
                 android:id="@+id/noti_app_main_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:title="此应用的所有通知"
+                app:title="选择一个应用程序来查看详细信息"
                 android:minHeight="?attr/actionBarSize"
                 />
         </com.google.android.material.appbar.AppBarLayout>

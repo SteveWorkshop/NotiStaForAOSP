@@ -48,4 +48,7 @@ public interface NotiDao {
 
     @Query("delete from NotiDumpItem where id=:id and isDeleted=1")
     int eraseById(Long id);
+
+    @Query("select * from NotiDumpItem where 1<0")
+    DataSource.Factory<Integer,NotiDumpItem> getPlaceHolder();
 }

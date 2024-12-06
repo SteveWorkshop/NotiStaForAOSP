@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -33,9 +35,7 @@ public class HomeViewFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         //inflater.inflate(R.layout.fragment_home_view, container, false)
-
         binding=FragmentHomeViewBinding.inflate(inflater,container,false);
         View view=binding.getRoot();
         setHasOptionsMenu(true);
@@ -53,6 +53,14 @@ public class HomeViewFragment extends Fragment {
 
     private void initView(){
         NotiAdapter adapter=new NotiAdapter(NotiAdapter.callback);
+        adapter.setBar(((item, index) -> {
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("noti_item",item);
+            NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.my_nav_host_fragment);
+            NavController navController = navHostFragment.getNavController();
+            navController.navigate(R.id.navDetailFragment,bundle);
+        }));
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false);
         binding.listFlyoutArea.notiList.setLayoutManager(layoutManager);
         binding.listFlyoutArea.notiList.setAdapter(adapter);

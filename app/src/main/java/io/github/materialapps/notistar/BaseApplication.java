@@ -3,6 +3,8 @@ package io.github.materialapps.notistar;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.navigation.fragment.NavHostFragment;
+
 import com.google.android.material.color.DynamicColors;
 
 public class BaseApplication extends Application {
