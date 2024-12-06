@@ -4,6 +4,7 @@ import android.content.pm.ApplicationInfo;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
@@ -28,14 +29,6 @@ public class AppViewViewModel extends ViewModel {
 
     @Getter
     @Setter
-    private MutableLiveData<List<AppItem>> allData=new MutableLiveData<>();
-
-    @Getter
-    @Setter
-    private LiveData notiLiveData;
-
-    @Getter
-    @Setter
     private PagedList.Config.Builder builder;
 
     private NotiDao notiDao;
@@ -44,6 +37,23 @@ public class AppViewViewModel extends ViewModel {
     @Getter
     @Setter
     private MutableLiveData<String> currentPackageName=new MutableLiveData<>("");
+
+    @Getter
+    @Setter
+    private MutableLiveData<List<AppItem>> allData=new MutableLiveData<>();
+
+    @Getter
+    @Setter
+    private MutableLiveData<String> pkgNameLiveData=new MutableLiveData<>();
+
+    @Getter
+    @Setter
+    private LiveData notiLiveData= Transformations.switchMap(pkgNameLiveData,pkgName->{
+        System.out.println("摸衣嗷喵？？？？？？？？？？");
+        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(notiDao.getByPackageName_v2(pkgName),builder.build());
+        return livePagedListBuilder.build();
+    });
+
 
     public AppViewViewModel()
     {
@@ -59,10 +69,12 @@ public class AppViewViewModel extends ViewModel {
         }).start();
     }
 
-    public  void loadNoiByPackage(String pkgName)
+    public void loadNoiByPackage(String pkgName)
     {
-        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(notiDao.getByPackageName_v2(pkgName),builder.build());
-        notiLiveData=livePagedListBuilder.build();
+        System.out.println("???????????????????????");
+        //LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(notiDao.getByPackageName_v2(pkgName),builder.build());
+        //notiLiveData=livePagedListBuilder.build();
+        pkgNameLiveData.setValue(pkgName);
     }
 
     private void init(){
